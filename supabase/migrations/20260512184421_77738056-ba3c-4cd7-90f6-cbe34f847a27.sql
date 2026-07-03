@@ -1,0 +1,3 @@
+ALTER TABLE public.quotations ADD COLUMN IF NOT EXISTS doc_date date NOT NULL DEFAULT CURRENT_DATE;
+ALTER TABLE public.purchase_orders ADD COLUMN IF NOT EXISTS doc_date date NOT NULL DEFAULT CURRENT_DATE;
+ALTER TABLE public.line_item_assignments ADD COLUMN IF NOT EXISTS assigned_date date NOT NULL DEFAULT CURRENT_DATE;

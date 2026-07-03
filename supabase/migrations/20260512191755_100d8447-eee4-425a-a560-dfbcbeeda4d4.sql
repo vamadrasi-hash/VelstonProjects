@@ -1,0 +1,1 @@
+ALTER TABLE public.workers ADD COLUMN IF NOT EXISTS daily_rate numeric NOT NULL DEFAULT 0;

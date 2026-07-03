@@ -1,0 +1,1 @@
+SELECT table_name, column_name FROM information_schema.columns WHERE table_schema='public' AND table_name IN ('sup_daily_roster','work_photos') ORDER BY table_name, ordinal_position;

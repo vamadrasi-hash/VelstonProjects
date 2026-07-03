@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 30% 98%;
+    --foreground: 220 50% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 50% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 50% 12%;
+
+    /* Velston navy */
+    --primary: 220 55% 22%;
+    --primary-foreground: 45 70% 92%;
+
+    --secondary: 42 55% 94%;
+    --secondary-foreground: 220 55% 22%;
+
+    --muted: 40 20% 94%;
+    --muted-foreground: 220 15% 40%;
+
+    /* Velston gold */
+    --accent: 42 65% 52%;
+    --accent-foreground: 220 55% 22%;
+
+    --destructive: 0 75% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 40 20% 88%;
+    --input: 40 20% 88%;
+    --ring: 42 65% 52%;
+
+    /* Today's status colors */
+    --status-selected: 220 14% 46%;   /* slate */
+    --status-assigned: 38 92% 50%;    /* amber */
+    --status-working: 217 91% 55%;    /* blue */
+    --status-done: 142 71% 38%;       /* green */
+    --status-notask: 220 9% 60%;      /* muted gray */
+    --status-photos: 271 76% 53%;     /* violet */
+    --status-ended: 271 60% 45%;      /* deep violet — day ended */
+    --status-carryover: 350 75% 55%;  /* rose — carry-over from prior day */
+    --status-warn: 25 90% 55%;        /* orange — late / missing photos */
+
+    /* Role & state tokens (app-wide semantic color coding) */
+    --role-primary: 232 70% 45%;      /* deep indigo — Primary supervisor */
+    --role-assist: 190 55% 40%;       /* slate teal — Assist supervisor */
+    --state-idle: 220 9% 55%;
+    --state-working: 38 92% 50%;
+    --state-ended: 152 60% 38%;
+    --state-blocked: 350 70% 50%;
+    --tone-money: 152 65% 30%;
+    --tone-progress: 210 90% 55%;
+
+    --radius: 0.6rem;
+
+    --gradient-brand: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+
+    --sidebar-background: 220 55% 18%;
+    --sidebar-foreground: 45 70% 92%;
+    --sidebar-primary: 42 65% 52%;
+    --sidebar-primary-foreground: 220 55% 18%;
+    --sidebar-accent: 220 55% 26%;
+    --sidebar-accent-foreground: 45 70% 92%;
+    --sidebar-border: 220 55% 26%;
+    --sidebar-ring: 42 65% 52%;
+  }
+
+  .dark {
+    --background: 220 45% 8%;
+    --foreground: 45 50% 92%;
+    --card: 220 45% 11%;
+    --card-foreground: 45 50% 92%;
+    --popover: 220 45% 11%;
+    --popover-foreground: 45 50% 92%;
+    --primary: 42 65% 52%;
+    --primary-foreground: 220 55% 14%;
+    --secondary: 220 30% 18%;
+    --secondary-foreground: 45 50% 92%;
+    --muted: 220 30% 16%;
+    --muted-foreground: 45 20% 65%;
+    --accent: 42 65% 52%;
+    --accent-foreground: 220 55% 14%;
+    --destructive: 0 63% 41%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 220 30% 20%;
+    --input: 220 30% 20%;
+    --ring: 42 65% 52%;
+  }
+}
+
+@layer base {
+  * { @apply border-border; }
+  html, body, #root { @apply overflow-x-hidden; }
+  body { @apply bg-background text-foreground; }
+  main { @apply min-w-0; }
+}
+
+@layer utilities {
+  .pb-safe { padding-bottom: calc(env(safe-area-inset-bottom) + 0px); }
+  .pt-safe { padding-top: calc(env(safe-area-inset-top) + 0px); }
+  .pb-nav { padding-bottom: calc(env(safe-area-inset-bottom) + 9rem); }
+  .bottom-nav { bottom: env(safe-area-inset-bottom); }
+}

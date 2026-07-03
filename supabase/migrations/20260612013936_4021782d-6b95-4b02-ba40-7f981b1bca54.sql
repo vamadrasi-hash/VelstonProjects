@@ -1,0 +1,2 @@
+ALTER TABLE public.workers ADD COLUMN IF NOT EXISTS contractor_share_amount NUMERIC NOT NULL DEFAULT 0;
+ALTER TABLE public.daily_logs ADD COLUMN IF NOT EXISTS contractor_share NUMERIC NOT NULL DEFAULT 0;

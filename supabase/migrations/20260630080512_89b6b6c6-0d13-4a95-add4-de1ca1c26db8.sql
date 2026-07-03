@@ -1,0 +1,2 @@
+ALTER TABLE public.line_item_assignments DROP CONSTRAINT IF EXISTS line_item_assignments_assignment_no_key;
+CREATE INDEX IF NOT EXISTS line_item_assignments_assignment_no_idx ON public.line_item_assignments(assignment_no);
