@@ -3,7 +3,7 @@ import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarProvider, SidebarTrigger, useSidebar,
 } from "@/components/ui/sidebar";
-import { FileText, ShoppingCart, Users, HardHat, UserCog, Building2, Package, Ruler, Tag, Wallet, LayoutDashboard, ShieldCheck, History, UsersRound, PieChart, Calculator, ClipboardList, MapPin, FileBarChart2 } from "lucide-react";
+import { FileText, ShoppingCart, Users, HardHat, UserCog, Building2, Package, Ruler, Tag, Wallet, LayoutDashboard, ShieldCheck, History, UsersRound, PieChart, Calculator, ClipboardList, MapPin, FileBarChart2, ScanFace } from "lucide-react";
 import { RoleSwitcher } from "./RoleSwitcher";
 import { useRole } from "@/lib/role";
 import logo from "@/assets/velston-logo.png";
@@ -14,6 +14,7 @@ const items = [
   { title: "Purchase Orders", url: "/admin/purchase-orders", icon: ShoppingCart },
   { title: "Assignments", url: "/admin/assignments", icon: ClipboardList },
   { title: "Daily Reports", url: "/admin/reports", icon: FileBarChart2 },
+  { title: "Attendance", url: "/admin/attendance", icon: ScanFace },
   { title: "Users", url: "/admin/users", icon: ShieldCheck },
   { title: "Daily Wages", url: "/admin/daily-wages", icon: Wallet },
   { title: "Wage Share", url: "/admin/wage-share", icon: PieChart },

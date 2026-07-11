@@ -8,6 +8,7 @@ export const SUP_LANG: Record<string, { en: string; gu: string }> = {
   team_today: { en: "Team Today", gu: "આજની ટીમ" },
   assign: { en: "Assign", gu: "સોંપણી" },
   photos: { en: "Photos", gu: "ફોટા" },
+  attendance: { en: "Attendance", gu: "હાજરી" },
   tasks: { en: "Tasks", gu: "કાર્યો" },
   report: { en: "Report", gu: "રિપોર્ટ" },
   wages: { en: "Wages", gu: "વેતન" },

@@ -25,6 +25,8 @@ import Status from "./pages/sup/Status";
 
 import SupAssign from "./pages/sup/Assign";
 import Photos from "./pages/sup/Photos";
+import Attendance from "./pages/sup/Attendance";
+import AdminAttendance from "./pages/admin/Attendance";
 import Team from "./pages/sup/Team";
 import WorkReport from "./pages/sup/WorkReport";
 import Wages from "./pages/sup/Wages";
@@ -86,6 +88,7 @@ const App = () => (
               <Route path="/admin/masters/uoms" element={<Uoms />} />
               <Route path="/admin/masters/designations" element={<Designations />} />
               <Route path="/admin/daily-wages" element={<DailyWages />} />
+              <Route path="/admin/attendance" element={<AdminAttendance />} />
               <Route path="/admin/reports" element={<Reports />} />
             </Route>
 
@@ -95,6 +98,7 @@ const App = () => (
               <Route path="/sup/roster" element={<Navigate to="/sup/team" replace />} />
               <Route path="/sup/assign" element={<SupAssign />} />
               <Route path="/sup/photos" element={<Photos />} />
+              <Route path="/sup/attendance" element={<Attendance />} />
               <Route path="/sup/work-report" element={<WorkReport />} />
               <Route path="/sup/wages" element={<Wages />} />
               <Route path="/sup/tasks" element={<Tasks />} />

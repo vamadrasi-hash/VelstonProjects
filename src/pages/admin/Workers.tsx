@@ -6,7 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from "@/components/ui/dialog";
-import { Plus, Trash2, Pencil, Download } from "lucide-react";
+import { Plus, Trash2, Pencil, Download, ScanFace } from "lucide-react";
 import { toast } from "sonner";
 import { useRole } from "@/lib/role";
 import { SearchableSelect } from "@/components/SearchableSelect";
@@ -15,6 +15,8 @@ import { EmployeeFormFields, EmpFields, blankEmp, validateEmp } from "@/componen
 import { EmployeePhoto } from "@/components/EmployeePhoto";
 import { XlsxImportDialog } from "@/components/XlsxImportDialog";
 import { downloadXlsx } from "@/lib/xlsx";
+import { FaceEnrollDialog } from "@/components/FaceEnrollDialog";
+import { loadEnrollmentCounts } from "@/lib/attendance";
 
 type Worker = {
   id: string; name: string; designation: string; contractor_id: string | null;
@@ -28,6 +30,8 @@ type LineCtx = { id: string; description: string; site: string; area: string | n
 export default function Workers() {
   const [list, setList] = useState<Worker[]>([]);
   const [lineCtx, setLineCtx] = useState<Record<string, LineCtx>>({});
+  const [faceCounts, setFaceCounts] = useState<Record<string, number>>({});
+  const [faceTarget, setFaceTarget] = useState<Worker | null>(null);
   const { supervisors } = useRole();
   const navigate = useNavigate();
   const [params, setParams] = useSearchParams();
@@ -68,7 +72,10 @@ export default function Workers() {
     });
     setLineCtx(ctx);
   };
-  useEffect(() => { load(); }, []);
+  const loadFaces = async () => {
+    try { setFaceCounts(await loadEnrollmentCounts()); } catch { /* ignore */ }
+  };
+  useEffect(() => { load(); loadFaces(); }, []);
 
   const reset = () => {
     setEditingId(null); setEmp(blankEmp);
@@ -334,7 +341,17 @@ export default function Workers() {
                 })()}
               </div>
             </div>
-            <div className="flex gap-1 self-end sm:self-auto">
+            <div className="flex gap-1 self-end sm:self-auto items-center">
+              <Button
+                variant={faceCounts[w.id] ? "ghost" : "outline"}
+                size="sm"
+                className={faceCounts[w.id] ? "text-emerald-600" : ""}
+                onClick={() => setFaceTarget(w)}
+                title={faceCounts[w.id] ? "Face registered — manage" : "Register face for attendance"}
+              >
+                <ScanFace className="h-4 w-4" />
+                <span className="hidden sm:inline">{faceCounts[w.id] ? "Face ✓" : "Face"}</span>
+              </Button>
               <Button variant="ghost" size="icon" onClick={() => openEdit(w)}><Pencil className="h-4 w-4" /></Button>
               <Button variant="ghost" size="icon" onClick={() => remove(w.id)}><Trash2 className="h-4 w-4" /></Button>
             </div>
@@ -342,6 +359,14 @@ export default function Workers() {
         ))}
         {filtered.length === 0 && <div className="text-muted-foreground text-sm">No workers match filters.</div>}
       </div>
+
+      <FaceEnrollDialog
+        worker={faceTarget}
+        open={!!faceTarget}
+        onOpenChange={(o) => { if (!o) setFaceTarget(null); }}
+        enrolledCount={faceTarget ? (faceCounts[faceTarget.id] || 0) : 0}
+        onChanged={loadFaces}
+      />
     </div>
   );
 }

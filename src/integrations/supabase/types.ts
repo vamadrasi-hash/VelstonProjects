@@ -43,6 +43,72 @@ export type Database = {
           },
         ]
       }
+      attendance_events: {
+        Row: {
+          accuracy_m: number | null
+          captured_at: string
+          created_at: string
+          created_by: string | null
+          id: string
+          kind: string
+          latitude: number | null
+          longitude: number | null
+          match_distance: number | null
+          method: string
+          storage_path: string | null
+          supervisor_id: string | null
+          work_date: string
+          worker_id: string
+        }
+        Insert: {
+          accuracy_m?: number | null
+          captured_at?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind: string
+          latitude?: number | null
+          longitude?: number | null
+          match_distance?: number | null
+          method?: string
+          storage_path?: string | null
+          supervisor_id?: string | null
+          work_date?: string
+          worker_id: string
+        }
+        Update: {
+          accuracy_m?: number | null
+          captured_at?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          kind?: string
+          latitude?: number | null
+          longitude?: number | null
+          match_distance?: number | null
+          method?: string
+          storage_path?: string | null
+          supervisor_id?: string | null
+          work_date?: string
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "attendance_events_supervisor_id_fkey"
+            columns: ["supervisor_id"]
+            isOneToOne: false
+            referencedRelation: "supervisors"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "attendance_events_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       clients: {
         Row: {
           address: string | null
@@ -1071,6 +1137,41 @@ export type Database = {
           },
         ]
       }
+      worker_face_enrollments: {
+        Row: {
+          created_at: string
+          created_by: string | null
+          descriptor: Json
+          id: string
+          source: string
+          worker_id: string
+        }
+        Insert: {
+          created_at?: string
+          created_by?: string | null
+          descriptor: Json
+          id?: string
+          source?: string
+          worker_id: string
+        }
+        Update: {
+          created_at?: string
+          created_by?: string | null
+          descriptor?: Json
+          id?: string
+          source?: string
+          worker_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "worker_face_enrollments_worker_id_fkey"
+            columns: ["worker_id"]
+            isOneToOne: false
+            referencedRelation: "workers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       workers: {
         Row: {
           aadhar: string | null
@@ -1182,6 +1283,7 @@ export type Database = {
       }
       is_approved: { Args: { _user_id: string }; Returns: boolean }
       is_staff: { Args: { _user_id: string }; Returns: boolean }
+      is_staff_or_supervisor: { Args: { _user_id: string }; Returns: boolean }
       release_supervisor_from_site: {
         Args: {
           _area_id: string
