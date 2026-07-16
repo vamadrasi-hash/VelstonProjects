@@ -65,7 +65,15 @@ export default function Attendance() {
   const pausedRef = useRef(false);          // paused while recording
   const lastDescriptorRef = useRef<Descriptor | null>(null);
 
-  const [facing, setFacing] = useState<"user" | "environment">("user");
+  // Camera preference persists across scans; back camera by default (the
+  // supervisor points the phone at the worker). Flip button changes it anytime.
+  const [facing, setFacingState] = useState<"user" | "environment">(
+    () => (localStorage.getItem("attendance_cam") === "user" ? "user" : "environment"),
+  );
+  const setFacing = (f: "user" | "environment") => {
+    localStorage.setItem("attendance_cam", f);
+    setFacingState(f);
+  };
   const [modelsReady, setModelsReady] = useState(false);
   const [camError, setCamError] = useState<string | null>(null);
   const [camOn, setCamOn] = useState(false);
@@ -302,7 +310,7 @@ export default function Attendance() {
               <Button
                 size="icon" variant="secondary"
                 className="absolute top-2 right-2 h-9 w-9 opacity-90"
-                onClick={() => setFacing((f) => (f === "user" ? "environment" : "user"))}
+                onClick={() => setFacing(facing === "user" ? "environment" : "user")}
                 title="Flip camera"
               >
                 <SwitchCamera className="h-4 w-4" />
