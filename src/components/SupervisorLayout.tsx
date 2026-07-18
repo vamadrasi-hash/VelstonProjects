@@ -1,5 +1,5 @@
 import { Outlet, NavLink } from "react-router-dom";
-import { Activity, Users, ListChecks, Camera, ClipboardList, Wallet } from "lucide-react";
+import { Activity, Users, ListChecks, Camera, ClipboardList, Wallet, ScanFace } from "lucide-react";
 import { RoleSwitcher } from "./RoleSwitcher";
 import { useRole } from "@/lib/role";
 import logo from "@/assets/velston-logo.png";
@@ -9,6 +9,7 @@ const navs = [
   { to: "/sup/status", k: "status", icon: Activity },
   { to: "/sup/assign", k: "assign", icon: ListChecks },
   { to: "/sup/team", k: "team_today", icon: Users },
+  { to: "/sup/attendance", k: "attendance", icon: ScanFace },
   { to: "/sup/photos", k: "photos", icon: Camera },
   { to: "/sup/work-report", k: "work_report", icon: ClipboardList },
   { to: "/sup/wages", k: "wages", icon: Wallet },
